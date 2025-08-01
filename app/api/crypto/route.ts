@@ -5,7 +5,7 @@ import {
   getMarketSummary,
   testVoltAgentConnection,
   getAvailableAgents,
-} from "@/lib/voltagent-client"
+} from "@/lib/mcp-client"
 
 export async function POST(request: NextRequest) {
   try {

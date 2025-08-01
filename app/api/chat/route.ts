@@ -1,6 +1,7 @@
 import { streamText } from "ai"
 import { openai } from "@ai-sdk/openai"
-import { voltAgentClient } from "@/lib/voltagent-client"
+// Import VoltAgent client utilities
+import * as voltAgentClient from "@/lib/mcp-client"
 
 export async function POST(req: Request) {
   try {

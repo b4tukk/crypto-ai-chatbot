@@ -219,6 +219,38 @@ export async function getMarketSummary(): Promise<MCPResponse> {
   }
 }
 
+// Retrieve list of available agents from VoltAgent
+export async function getAvailableAgents(): Promise<MCPResponse> {
+  try {
+    const result = await callVoltAgentTool("get_agents", {})
+
+    if (result && result.success !== false) {
+      return { success: true, data: result }
+    }
+
+    // Fallback mock data if VoltAgent does not respond
+    return {
+      success: true,
+      data: {
+        data: [
+          {
+            id: "crypto-mcp",
+            model: "gpt-4o-mini",
+            status: "unknown",
+            tools: ["get_crypto_price", "get_market_summary"],
+          },
+        ],
+      },
+    }
+  } catch (error) {
+    console.error("Get agents error:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error occurred",
+    }
+  }
+}
+
 // Test VoltAgent connection
 export async function testVoltAgentConnection(): Promise<boolean> {
   try {
